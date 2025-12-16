@@ -1,5 +1,6 @@
 import os
 import http.server
+
 # from bokeh import export_png
 from dotenv import load_dotenv
 from telegram import Update, ForceReply
@@ -63,9 +64,10 @@ def target_html():
     # Combine into one HTML snippet
     target_html = str(section_h1) + str(section_div)
 
+
 def generate_image_from_html():
     import imgkit
-    
+
     IMG_PATH = "menu.png"
     options = {
         "encoding": "UTF-8",
@@ -73,11 +75,12 @@ def generate_image_from_html():
         "format": "png",
         "zoom": "1.5",  # scale up for readability
     }
-    
+
     imgkit.from_string(target_html, IMG_PATH, options=options)
 
+
 async def lunes(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_photo(photo=open('lunes.png', "rb"))
+    await update.message.reply_photo(photo=open("lunes.png", "rb"))
 
 
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
