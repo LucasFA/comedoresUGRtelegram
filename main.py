@@ -7,7 +7,11 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 
 def main():
-    load_dotenv()
+    try:
+        load_dotenv()
+    except FileNotFoundError:
+        print("No environment file found. Proceeding.")
+
     token = os.getenv("TELEGRAM_TOKEN")
     if not token:
         raise RuntimeError("Telegram token not defined")
