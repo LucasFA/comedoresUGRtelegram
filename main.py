@@ -2,14 +2,22 @@ import os
 import http.server
 
 # from bokeh import export_png
-from dotenv import load_dotenv
 from telegram import Update, ForceReply
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 
+def load_env(path=".env"):
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            key, value = line.split("=", 1)
+            os.environ[key] = value
+
 def main():
     try:
-        load_dotenv()
+        load_env()
     except FileNotFoundError:
         print("No environment file found. Proceeding.")
 
